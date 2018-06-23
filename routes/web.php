@@ -67,3 +67,19 @@ Route::get('getForm',function() {
 });
 
 Route::post('postForm',['as'=>'postForm','uses'=>'MyController@postForm']);
+
+//Cookie
+Route::get('setCookie','MyController@setCookie');
+
+Route::get('getCookie','MyController@getCookie');
+
+//uploadFile
+Route::get('uploadFile', function() {
+	return view('postFile');
+});
+
+Route::post('postFile',['as'=>'postFile','uses'=>'MyController@postFile']);
+
+Route::get('getJson','MyController@getJson');
+
+Route::get('myView','MyController@myView');
