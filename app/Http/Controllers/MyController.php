@@ -61,4 +61,17 @@ class MyController extends Controller
     public function myView() {
         return view('view.KhoaPham');
     }
+
+    public function Time($time) {
+        return view('myView',['time'=>$time]);
+    }
+
+    public function blade($str) {
+        if($str == 'laravel') {
+            return view('pages.laravel');
+        }
+        elseif ($str == 'php') {
+            return view('pages.php');
+        }
+    }
 }

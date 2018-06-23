@@ -83,3 +83,18 @@ Route::post('postFile',['as'=>'postFile','uses'=>'MyController@postFile']);
 Route::get('getJson','MyController@getJson');
 
 Route::get('myView','MyController@myView');
+
+Route::get('Time/{t}','MyController@Time');
+
+View::share('KhoaHoc','Laravel');
+
+//Blade tempplate
+Route::get('blade',function() {
+	return view('pages.laravel');
+});
+
+Route::get('php',function(){
+	return view('pages.php');
+});
+
+Route::get('BladeTemplate/{str}','MyController@blade');
