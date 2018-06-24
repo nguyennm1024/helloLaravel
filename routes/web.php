@@ -98,3 +98,53 @@ Route::get('php',function(){
 });
 
 Route::get('BladeTemplate/{str}','MyController@blade');
+
+//Database
+Route::get('database',function() {
+	// Schema::create('loaisanpham',function($table){
+	// 	$table->increments('id');
+	// 	$table->string('ten',200);
+	// });
+	Schema::create('theloai',function($table){
+		$table->increments('id');
+		$table->string('ten',200)->nullable();
+		$table->string('nsx')->default('Nha san xuat');
+	});
+	echo "Da thuc hien lenh tao bang";
+});
+
+Route::get('lienketbang',function(){
+	Schema::create('sanpham',function($table){
+		$table->increments('id');
+		$table->string('ten');
+		$table->float('gia');
+		$table->integer('soluong')->default(0);
+		$table->integer('id_loaisanpham')->unsigned();
+		$table->foreign('id_loaisanpham')->references('id')->on('loaisanpham');
+	});
+	echo "Da tao bang san pham";
+});
+
+Route::get('suabang',function(){
+	Schema::table('theloai',function($table){
+		$table->dropColumn('nsx');
+	});
+	echo "Da xoa cot";
+});
+
+Route::get('themcot',function(){
+	Schema::table('theloai',function($table){
+		$table->string('email');
+	});
+	echo "Da them cot email";
+});
+
+Route::get('doiten',function(){
+	Schema::rename('theloai','nguoidung');
+	echo "Da doi ten bang";
+});
+
+Route::get('xoabang',function(){
+	Schema::drop('nguoidung');
+	echo "Da xoa bang nguoi dung";
+});

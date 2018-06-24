@@ -67,11 +67,12 @@ class MyController extends Controller
     }
 
     public function blade($str) {
+        $khoahoc = '';
         if($str == 'laravel') {
-            return view('pages.laravel');
+            return view('pages.laravel',['khoahoc'=>$khoahoc]);
         }
         elseif ($str == 'php') {
-            return view('pages.php');
+            return view('pages.php',['khoahoc'=>$khoahoc]);
         }
     }
 }
