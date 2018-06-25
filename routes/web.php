@@ -148,3 +148,14 @@ Route::get('xoabang',function(){
 	Schema::drop('nguoidung');
 	echo "Da xoa bang nguoi dung";
 });
+//Query Builder
+Route::get('qb/get',function(){
+	$data = DB::table('users')->get();
+	foreach($data as $row)
+	{
+		foreach($row as $key=>$value){
+			echo $key,":",$value,"<br>";
+		}
+		echo "<hr>";
+	}
+});
