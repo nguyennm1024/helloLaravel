@@ -244,3 +244,27 @@ Route::get('lienketloaisanpham',function(){
 	$data = App\LoaiSanPham::find(2)->sanpham->toJson();
 	var_dump($data);
 });
+
+Route::get('diem',function(){
+	echo "Ban da co diem";
+})->middleware('MyMiddle')->name('diem');
+
+Route::get('loi',function(){
+	echo "Ban chua co diem";
+})->name('loi');
+
+Route::get('nhapdiem',function(){
+	return view('nhapdiem');
+})->name('nhapdiem');
+
+Route::get('dangnhap',function(){
+	return view('dangnhap');
+});
+
+Route::get('thu',function(){
+	return view('thanhcong');
+});
+
+Route::post('login','AuthController@login')->name('login');
+
+Route::get('logout','AuthController@logout');
