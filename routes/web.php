@@ -159,3 +159,88 @@ Route::get('qb/get',function(){
 		echo "<hr>";
 	}
 });
+
+Route::get('qb/where',function(){
+	$data = DB::table('users')->where('id','=',5)->get();
+	foreach($data as $row)
+	{
+		foreach($row as $key=>$value){
+			echo $key,":",$value,"<br>";
+		}
+		echo "<hr>";
+	}
+});
+
+Route::get('qb/select',function(){
+	$data = DB::table('users')->select(['id','name','email'])->where('id',5)->get();
+
+	foreach($data as $row)
+	{
+		foreach($row as $key=>$value){
+			echo $key,":",$value,"<br>";
+		}
+		echo "<hr>";
+	}
+});
+
+Route::get('qb/orderby',function(){
+	$data = DB::table('users')->select(DB::raw('id,name as hoten,email'))->orderBy('id','desc')->skip(1)->take(2)->get();
+	var_dump($data);
+	echo $data->count();
+	// foreach($data as $row)
+	// {
+	// 	foreach($row as $key=>$value){
+	// 		echo $key,":",$value,"<br>";
+	// 	}
+	// 	echo "<hr>";
+	// }
+});
+
+Route::get('model/save',function(){
+	$user = new App\User();
+	$user->name = "Mai";
+	$user->email = "Mai@email.com";
+	$user->password = "matkhau";
+	$user->save();
+	echo "Da save";
+});
+
+Route::get('model/sanpham/save/{ten}',function($ten){
+	$sanpham = new App\SanPham();
+	$sanpham->ten = $ten;
+	$sanpham->soluong = 100;
+	$sanpham->save();
+	echo "Saved";
+});
+
+Route::get('model/sanpham/all',function(){
+	$sanpham = App\SanPham::all()->toArray();
+	var_dump($sanpham);
+});
+
+Route::get('model/sanpham/ten',function(){
+	$sanpham = App\SanPham::where('ten','PC')->get()->toArray();
+	var_dump($sanpham);
+	echo $sanpham[0]['ten'];
+});
+
+Route::get('model/sanpham/delete',function(){
+	$sanpham = App\SanPham::destroy(3);
+	echo "deleted";
+});
+
+Route::get('taocot',function(){
+	Schema::table('sanpham',function($table){
+		$table->integer('id_loaisanpham')->unsigned();
+	});
+});
+
+Route::get('lienket',function(){
+	$data = App\SanPham::find(4)->loaisanpham->toArray();
+	var_dump($data);
+});
+
+Route::get('lienketloaisanpham',function(){
+	$data = App\LoaiSanPham::find(2)->sanpham->toJson();
+	var_dump($data);
+});
